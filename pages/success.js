@@ -14,7 +14,7 @@ const Success = () => {
     setTotalPrice(0);
     setTotalQuantities(0);
     runFireworks();
-  }, [setCartItems, setTotalPrice, setTotalQuantities]);
+  }, []);
 
   return (
     <div className="success-wrapper">
@@ -30,7 +30,7 @@ const Success = () => {
             order@example.com
           </a>
         </p>
-        <Link href="/" passHref>
+        <Link href="/">
           <button type="button" width="300px" className="btn">
             Continue Shopping
           </button>
