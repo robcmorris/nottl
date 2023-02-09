@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 interface NavLink {
@@ -97,6 +98,13 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="flex w-9/12 items-center justify-end">
+        <div className="hidden md:flex md:flex-grow">
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/services">Services</NavLink>
+          <NavLink to="/projects">Projects</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
+        </div>
+        <AuthShowcase />
         <div
           className="relative z-50 flex h-8 w-8 flex-col items-center justify-between md:hidden"
           onClick={() => {
@@ -120,14 +128,23 @@ export default function Navbar() {
             }`}
           />
         </div>
-
-        <div className="hidden md:flex">
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/services">Services</NavLink>
-          <NavLink to="/projects">Projects</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
-        </div>
       </div>
     </nav>
   );
 }
+
+const AuthShowcase: React.FC = () => {
+  const { data: sessionData } = useSession();
+
+  return (
+    <div className="flex items-center justify-center gap-4">
+      <button
+        type="button"
+        className="rounded-full bg-slate-500 px-10 py-3 font-semibold text-white no-underline transition hover:bg-slate-500/20 hover:text-black"
+        onClick={sessionData ? () => void signOut() : () => void signIn()}
+      >
+        {sessionData ? `Sign out` : "Sign in"}
+      </button>
+    </div>
+  );
+};
