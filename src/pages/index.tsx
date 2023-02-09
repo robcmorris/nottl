@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import SEO from "../components/SEO";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import styles from "../utils/styles";
 
 import { api } from "../utils/api";
